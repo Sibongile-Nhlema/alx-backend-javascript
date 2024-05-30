@@ -8,6 +8,6 @@ export default class Building {
   }
 
   evacuationWarningMessage() {
-    return `Evacuate the building! Square footage: ${this._sqft}`;
+    throw new Error('Class extending Building must override evacuationWarningMessage');
   }
 }

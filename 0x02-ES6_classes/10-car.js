@@ -10,7 +10,7 @@ export default class Car {
   }
 
   cloneCar() {
-    return new Car(brand, motor, color);
+    return new Car();
   }
 }
 

@@ -7,7 +7,7 @@ export default class Pricing {
   }
 
   get amount() {
-    return this.amount;
+    return this._amount;
   }
 
   set amount(newAmount) {

@@ -1,17 +1,21 @@
 export default function cleanSet(set, startString) {
-  let answer = '';
-  if (startString === '') {
-    return answer;
+  // check if startstring is empty or not a string
+  if (typeof startString !== 'string' || startString === '') {
+    return '';
   }
-  // search set for the startString and only add the characters after that
+
+  let answer = '';
+
   set.forEach((value) => {
-    if (value.startsWith(startString)) {
+    if (typeof value === 'string' && value.startsWith(startString)) {
       answer += `${value.slice(startString.length)}-`;
     }
   });
 
   // Remove the trailing hyphen only if it exists
-  answer = answer.slice(0, -1);
+  if (answer.endsWith('-')) {
+    answer = answer.slice(0, -1);
+  }
 
   return answer;
 }

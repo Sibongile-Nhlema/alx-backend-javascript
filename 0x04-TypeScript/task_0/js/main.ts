@@ -48,4 +48,3 @@ function renderTable(students: Student[]) {
 
 // Render the table
 renderTable(studentsList);
-

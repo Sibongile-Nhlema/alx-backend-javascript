@@ -40,3 +40,34 @@ export function printTeacher(firstName: string, lastName: string): string {
 export interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
+
+// Define the interface for Student constructor
+export interface StudentConstructor {
+  new(firstName: string, lastName: string): StudentClassInterface;
+}
+
+// Define the interface for StudentClass methods
+export interface StudentClassInterface {
+  displayName(): string;
+  workOnHomework(): string;
+}
+
+// Define the StudentClass
+export class StudentClass implements StudentClassInterface {
+  private firstName: string;
+  private lastName: string;
+
+  constructor(firstName: string, lastName: string) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+
+  workOnHomework(): string {
+    return "Currently working";
+  }
+}
+

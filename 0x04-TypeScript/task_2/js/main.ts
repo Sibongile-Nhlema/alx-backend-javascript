@@ -1,4 +1,6 @@
-// Defining variou interfaces with the 3 expected methods
+// Task 5
+
+// Defining various interfaces with the 3 expected methods
 
 // Define DirectorInterface
 interface DirectorInterface {
@@ -53,3 +55,18 @@ interface DirectorInterface {
     }
   }
   
+  // Task 6
+
+  // Function to check if employee is a Director
+export function isDirector(employee: DirectorInterface | TeacherInterface): employee is DirectorInterface {
+  return (employee as DirectorInterface).workDirectorTasks !== undefined;
+}
+
+// Function to execute work based on employee type
+export function executeWork(employee: DirectorInterface | TeacherInterface): string {
+  if(isDirector(employee)) {
+    return employee.workDirectorTasks();
+  } else {
+    return employee.workTeacherTasks();
+  }
+}

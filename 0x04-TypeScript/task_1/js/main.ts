@@ -10,12 +10,23 @@ export interface Teacher {
   
   // Create an instance a Teacher
   const teacher1: Teacher = {
-    firstName: '',
+    firstName: 'Thabo',
     fullTimeEmployee: false,
-    lastName: '',
-    location: '',
+    lastName: 'Bester',
+    location: 'Durban',
     contract: false,
   };
-  
-  // Print the Teacher instance
-  console.log(teacher1);  
+
+// Define the Directors interface extending Teacher
+export interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+// Create an instance of Directors
+const director1: Directors = {
+  firstName: 'Simon',
+  lastName: 'Says',
+  fullTimeEmployee: true,
+  location: 'New Zealand',
+  numberOfReports: 42,
+};

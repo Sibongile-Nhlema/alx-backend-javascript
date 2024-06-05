@@ -30,3 +30,13 @@ const director1: Directors = {
   location: 'New Zealand',
   numberOfReports: 42,
 };
+
+// Create the function printTeacher that accepts two arguments
+export function printTeacher(firstName: string, lastName: string): string {
+  return `${firstName.charAt(0)}. ${lastName}`;
+}
+
+// Interface for the printTeacher function
+export interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}

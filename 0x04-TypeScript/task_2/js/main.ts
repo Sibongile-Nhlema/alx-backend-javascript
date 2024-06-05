@@ -55,7 +55,7 @@ interface DirectorInterface {
     }
   }
   
-  // Task 6
+// Task 6
 
   // Function to check if employee is a Director
 export function isDirector(employee: DirectorInterface | TeacherInterface): employee is DirectorInterface {
@@ -68,5 +68,19 @@ export function executeWork(employee: DirectorInterface | TeacherInterface): str
     return employee.workDirectorTasks();
   } else {
     return employee.workTeacherTasks();
+  }
+}
+
+// Task 7
+
+// String literal type for Subjects
+export type Subjects = 'Math' | 'History';
+
+// Function to teach class based on subject
+export function teachClass(todayClass: Subjects): string {
+  if (todayClass === 'Math') {
+    return 'Teaching Math';
+  } else if (todayClass === 'History') {
+    return 'Teaching History';
   }
 }

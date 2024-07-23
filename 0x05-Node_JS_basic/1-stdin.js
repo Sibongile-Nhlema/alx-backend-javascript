@@ -17,7 +17,7 @@ readl.on('line', (input) => {
   console.log(`Your name is: ${name}`);
   readl.close();
   if (shouldDisplayExitMessage) {
-    console.log('This important software is now closing');
+    console.log('This important software is now closing\n');
   }
 });
 

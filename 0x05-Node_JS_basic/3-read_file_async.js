@@ -19,7 +19,8 @@ async function countStudents(path) {
           fieldCounts[field] = 0;
           fieldLists[field] = [];
         }
-        fieldCounts[field]++;
+        // Replace unary operator with equivalent code
+        fieldCounts[field] = fieldCounts[field] + 1;
         fieldLists[field].push(firstname);
       }
     }

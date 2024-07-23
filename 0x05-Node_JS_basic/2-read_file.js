@@ -5,8 +5,14 @@ function countStudents(path) {
         // Read the file synchronously
         const data = fs.readFileSync(path, 'utf8');
 
-        // Split the content by lines
-        const lines = data.trim().split('\n');
+        // Split the content by lines and filter out empty lines
+        const lines = data.trim().split('\n').filter(line => line.trim() !== '');
+
+        // Check if there are enough lines for processing
+        if (lines.length <= 1) {
+            console.log('Number of students: 0');
+            return;
+        }
 
         // Initialize student counts and lists by field
         const fieldCounts = {};
@@ -26,7 +32,7 @@ function countStudents(path) {
         }
 
         // Log total number of students
-        const totalStudents = lines.length - 1;
+        const totalStudents = lines.length - 1; // Excluding header
         console.log(`Number of students: ${totalStudents}`);
         
         // Log details for each field
@@ -35,8 +41,8 @@ function countStudents(path) {
             console.log(`Number of students in ${field}: ${count}. List: ${list}`);
         }
     } catch (err) {
-        throw new Error('Cannot load the database')
+        throw new Error('Cannot load the database');
     }
 }
 
-module.exports = countStudents;
+module.exports = countStudents

@@ -6,7 +6,7 @@ async function countStudents(path) {
     const data = await fs.readFile(path, 'utf8');
 
     // Split the content by lines and filter out empty ones
-    const lines = data.split('\n').filter(line => line.trim() !== '');
+    const lines = data.split('\n').filter((line) => line.trim() !== '');
 
     const fieldCounts = {};
     const fieldLists = {};

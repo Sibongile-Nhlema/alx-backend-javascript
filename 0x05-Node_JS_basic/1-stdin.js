@@ -1,33 +1,17 @@
-const readline = require('readline');
-
-// Set up the interface to handle interactive input
-const readl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
+// display message
 process.stdout.write('Welcome to Holberton School, what is your name?\n');
 
 // Flag to determine if the exit message should be displayed
-let shouldDisplayExitMessage = true;
+const shouldDisplayExitMessage = false;
 
-// Handle interactive user input
-readl.on('line', (input) => {
-  const name = input.trim();
+// user inputs
+process.stdin.on('data', (data) => {
+  const name = data.toString().trim();
   console.log(`Your name is: ${name}`);
-  readl.close();
-  if (shouldDisplayExitMessage) {
-    console.log('This important software is now closing\n');
-  }
+  process.exit();
 });
 
-// Check if the process is receiving piped input, if not don't print
-process.stdin.on('data', () => {
-  shouldDisplayExitMessage = false;
-});
-
-process.stdin.on('end', () => {
-  if (shouldDisplayExitMessage) {
-    console.log('This important software is now closing');
-  }
+// exit message
+process.on('exit', () => {
+  console.log('This important software is now closing');
 });

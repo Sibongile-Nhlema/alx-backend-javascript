@@ -9,19 +9,18 @@ function countStudents(path) {
     const fieldCounts = {};
     const fieldLists = {};
 
-    let i = 1;
-    while (i < lines.length) {
+    for (let i = 1; i < lines.length; i += 1) {
       const [firstname, , , field] = lines[i].split(',');
       if (field) {
         if (!fieldCounts[field]) {
           fieldCounts[field] = 0;
           fieldLists[field] = [];
         }
-        fieldCounts[field] = fieldCounts[field] + 1;
+        fieldCounts[field] += 1;
         fieldLists[field].push(firstname);
       }
-      i++;
     }
+
     // Log total number of students
     const totalStudents = lines.length - 1;
     console.log(`Number of students: ${totalStudents}`);

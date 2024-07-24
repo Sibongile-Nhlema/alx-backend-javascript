@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs').promises;
+
 const app = express();
 const port = 1245;
 
@@ -50,7 +51,7 @@ app.get('/', (req, res) => {
 app.get('/students', async (req, res) => {
   res.set('Content-Type', 'text/plain');
   res.write('This is the list of our students\n');
-  
+
   const databasePath = process.argv[2];
   if (databasePath) {
     try {

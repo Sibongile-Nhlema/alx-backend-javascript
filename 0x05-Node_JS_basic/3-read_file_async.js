@@ -12,7 +12,7 @@ async function countStudents(path) {
     const fieldLists = {};
 
     // Process every line after the header
-    for (let i = 1; i < lines.length; i++) {
+    for (let i = 1; i < lines.length; i += 1) {
       const [firstname, , , field] = lines[i].split(',');
       if (firstname && field) {
         if (!fieldCounts[field]) {
@@ -20,7 +20,7 @@ async function countStudents(path) {
           fieldLists[field] = [];
         }
         // Replace unary operator with equivalent code
-        fieldCounts[field] = fieldCounts[field] + 1;
+        fieldCounts[field] += 1;
         fieldLists[field].push(firstname);
       }
     }

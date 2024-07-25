@@ -1,10 +1,10 @@
-const request = require('request');
 const { expect } = require('chai');
+const request = require('request');
 const app = require('./api');
 
-describe('Index page', () => {
-  let server;
+let server;
 
+describe('Index page', () => {
   before((done) => {
     server = app.listen(7865, () => {
       done();
@@ -17,14 +17,14 @@ describe('Index page', () => {
     });
   });
 
-  it('Correct status code?', (done) => {
+  it('should return status 200', (done) => {
     request.get('http://localhost:7865', (error, response, body) => {
       expect(response.statusCode).to.equal(200);
       done();
     });
   });
 
-  it('Correct result?', (done) => {
+  it('should return the correct message', (done) => {
     request.get('http://localhost:7865', (error, response, body) => {
       expect(body).to.equal('Welcome to the payment system');
       done();

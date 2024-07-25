@@ -11,7 +11,7 @@ describe('getPaymentTokenFromAPI', () => {
       .catch((err) => done(err));
   });
 
-  it('should do nothing when success is false', (done) => {
+  it('should resolve with undefined when success is false', (done) => {
     getPaymentTokenFromAPI(false)
       .then((response) => {
         expect(response).to.be.undefined;

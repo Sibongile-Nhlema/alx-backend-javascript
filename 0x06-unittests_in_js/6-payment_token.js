@@ -4,6 +4,7 @@ const getPaymentTokenFromAPI = (success) => {
         resolve({ data: 'Successful response from the API' });
       } else {
         // No action needed
+        resolve();
       }
     });
   };

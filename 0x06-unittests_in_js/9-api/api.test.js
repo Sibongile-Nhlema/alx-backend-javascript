@@ -61,37 +61,3 @@ describe('Cart page', function() {
     });
   });
 });
-
-describe('Available payments endpoint', function() {
-  it('should return correct JSON structure and status 200', function(done) {
-    request.get('http://localhost:7865/available_payments', (error, response, body) => {
-      expect(response.statusCode).to.equal(200);
-      expect(body).to.deep.equal(JSON.stringify({
-        payment_methods: {
-          credit_cards: true,
-          paypal: false
-        }
-      }));
-      done();
-    });
-  });
-});
-
-describe('Login endpoint', function() {
-  it('should return status 200 for POST request with JSON body', function(done) {
-    request.post('http://localhost:7865/login', {
-      json: { userName: 'Betty' }
-    }, (error, response, body) => {
-      expect(response.statusCode).to.equal(200);
-      expect(body).to.equal('Welcome Betty');
-      done();
-    });
-  });
-
-  it('should return status 404 for GET request to /login', function(done) {
-    request.get('http://localhost:7865/login', (error, response, body) => {
-      expect(response.statusCode).to.equal(404);
-      done();
-    });
-  });
-});

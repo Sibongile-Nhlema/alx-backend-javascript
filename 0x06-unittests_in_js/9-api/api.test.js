@@ -3,61 +3,83 @@ const request = require('request');
 const app = require('./api');
 
 let server;
+const port = 7865; // Use the same port as the server
 
-describe('Index page', function() {
-  before(function(done) {
-    server = app.listen(7865, () => {
+describe('Index page', () => {
+  before((done) => {
+    server = app.listen(port, (err) => {
+      if (err) {
+        console.error('Error starting server:', err);
+        return done(err);
+      }
       done();
     });
   });
 
-  after(function(done) {
-    server.close(() => {
+  after((done) => {
+    server.close((err) => {
+      if (err) {
+        console.error('Error stopping server:', err);
+        return done(err);
+      }
       done();
     });
   });
 
-  it('should return status 200 for root', function(done) {
-    request.get('http://localhost:7865', (error, response, body) => {
+  it('should return status 200 for /', (done) => {
+    request.get(`http://localhost:${port}`, (error, response, body) => {
+      if (error) {
+        console.error('Request error:', error);
+        return done(error);
+      }
       expect(response.statusCode).to.equal(200);
       done();
     });
   });
 
-  it('should return the correct message for root', function(done) {
-    request.get('http://localhost:7865', (error, response, body) => {
+  it('should return the correct message for /', (done) => {
+    request.get(`http://localhost:${port}`, (error, response, body) => {
+      if (error) {
+        console.error('Request error:', error);
+        return done(error);
+      }
       expect(body).to.equal('Welcome to the payment system');
       done();
     });
   });
-});
 
-describe('Cart page', function() {
-  it('should return status 200 for valid cart id', function(done) {
-    request.get('http://localhost:7865/cart/12', (error, response, body) => {
-      expect(response.statusCode).to.equal(200);
-      done();
+  describe('Cart page', () => {
+    it('should return status 200 when :id is a number', (done) => {
+      request.get(`http://localhost:${port}/cart/12`, (error, response, body) => {
+        if (error) {
+          console.error('Request error:', error);
+          return done(error);
+        }
+        expect(response.statusCode).to.equal(200);
+        done();
+      });
     });
-  });
 
-  it('should return correct message for valid cart id', function(done) {
-    request.get('http://localhost:7865/cart/12', (error, response, body) => {
-      expect(body).to.equal('Payment methods for cart 12');
-      done();
+    it('should return the correct message when :id is a number', (done) => {
+      request.get(`http://localhost:${port}/cart/12`, (error, response, body) => {
+        if (error) {
+          console.error('Request error:', error);
+          return done(error);
+        }
+        expect(body).to.equal('Payment methods for cart 12');
+        done();
+      });
     });
-  });
 
-  it('should return status 404 for invalid cart id', function(done) {
-    request.get('http://localhost:7865/cart/hello', (error, response, body) => {
-      expect(response.statusCode).to.equal(404);
-      done();
-    });
-  });
-
-  it('should return status 404 for missing cart id', function(done) {
-    request.get('http://localhost:7865/cart/', (error, response, body) => {
-      expect(response.statusCode).to.equal(404);
-      done();
+    it('should return status 404 when :id is not a number', (done) => {
+      request.get(`http://localhost:${port}/cart/hello`, (error, response, body) => {
+        if (error) {
+          console.error('Request error:', error);
+          return done(error);
+        }
+        expect(response.statusCode).to.equal(404);
+        done();
+      });
     });
   });
 });

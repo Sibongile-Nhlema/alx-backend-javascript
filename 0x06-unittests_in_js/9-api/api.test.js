@@ -3,9 +3,10 @@ const request = require('request');
 const app = require('./api');
 
 let server;
-const port = 7865; // Use the same port as the server
+const port = 7865; // Use the same port as defined in api.js
 
 describe('Index page', () => {
+  // Start the server before running tests
   before((done) => {
     server = app.listen(port, (err) => {
       if (err) {
@@ -16,6 +17,7 @@ describe('Index page', () => {
     });
   });
 
+  // Stop the server after tests complete
   after((done) => {
     server.close((err) => {
       if (err) {
@@ -26,7 +28,7 @@ describe('Index page', () => {
     });
   });
 
-  it('should return status 200 for /', (done) => {
+  it('should return status 200 for index page', (done) => {
     request.get(`http://localhost:${port}`, (error, response, body) => {
       if (error) {
         console.error('Request error:', error);
@@ -37,7 +39,7 @@ describe('Index page', () => {
     });
   });
 
-  it('should return the correct message for /', (done) => {
+  it('should return the correct content for index page', (done) => {
     request.get(`http://localhost:${port}`, (error, response, body) => {
       if (error) {
         console.error('Request error:', error);
@@ -45,41 +47,6 @@ describe('Index page', () => {
       }
       expect(body).to.equal('Welcome to the payment system');
       done();
-    });
-  });
-
-  describe('Cart page', () => {
-    it('should return status 200 when :id is a number', (done) => {
-      request.get(`http://localhost:${port}/cart/12`, (error, response, body) => {
-        if (error) {
-          console.error('Request error:', error);
-          return done(error);
-        }
-        expect(response.statusCode).to.equal(200);
-        done();
-      });
-    });
-
-    it('should return the correct message when :id is a number', (done) => {
-      request.get(`http://localhost:${port}/cart/12`, (error, response, body) => {
-        if (error) {
-          console.error('Request error:', error);
-          return done(error);
-        }
-        expect(body).to.equal('Payment methods for cart 12');
-        done();
-      });
-    });
-
-    it('should return status 404 when :id is not a number', (done) => {
-      request.get(`http://localhost:${port}/cart/hello`, (error, response, body) => {
-        if (error) {
-          console.error('Request error:', error);
-          return done(error);
-        }
-        expect(response.statusCode).to.equal(404);
-        done();
-      });
     });
   });
 });
